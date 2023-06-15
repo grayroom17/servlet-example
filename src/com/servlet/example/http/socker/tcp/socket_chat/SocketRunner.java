@@ -1,4 +1,4 @@
-package com.servlet.example.http.socker.socket_chat;
+package com.servlet.example.http.socker.tcp.socket_chat;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

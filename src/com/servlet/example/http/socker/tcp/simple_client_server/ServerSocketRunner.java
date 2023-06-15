@@ -1,4 +1,4 @@
-package com.servlet.example.http.socker.simple_client_server;
+package com.servlet.example.http.socker.tcp.simple_client_server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
