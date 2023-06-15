@@ -1,21 +1,21 @@
-package com.servlet.example.http.socker;
+package com.servlet.example.http.socker.simple_client_server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SocketRunner {
+class ServerSocketRunner {
 
     public static void main(String[] args) throws IOException {
-        InetAddress inetAddress = InetAddress.getByName("google.com");
-        try (Socket socket = new Socket(inetAddress, 80);
+        try (ServerSocket serverSocket = new ServerSocket(7777);
+             Socket socket = serverSocket.accept();
              DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
              DataInputStream inputStream = new DataInputStream(socket.getInputStream())) {
-            outputStream.writeUTF("Hello world!");
-            byte[] response = inputStream.readAllBytes();
-            System.out.println(response.length);
+            System.out.println("Client request: " + inputStream.readUTF());
+            outputStream.writeUTF("Hello from server!");
         }
     }
+
 }
