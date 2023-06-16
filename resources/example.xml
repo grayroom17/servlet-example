@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<request>
+<request id="25">
     <start-row>
         <http-method>GET</http-method>
         <url>www.google.com</url>
@@ -12,5 +12,5 @@
         <header name="accept" value="application/json"/>
     </headers>
 
-    <body/>
+    <body type="text/plain"/>
 </request>
