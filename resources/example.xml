@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<request id="25">
+    <start-row>
+        <http-method>GET</http-method>
+        <url>www.google.com</url>
+        <http-version>1.4</http-version>
+    </start-row>
+
+    <headers>
+        <header name="content-type" value="text/html"/>
+        <header name="accept" value="application/json"/>
+    </headers>
+
+    <body type="text/plain"/>
+</request>
