@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.Map;
 
 @WebServlet(urlPatterns = "/first-servlet")
 public class FirstServlet extends HttpServlet {
@@ -19,12 +20,22 @@ public class FirstServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String paramValue = req.getParameter("param");
+        Map<String, String[]> parameterMap = req.getParameterMap();
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String paramValue = req.getParameter("param");
+        Map<String, String[]> parameterMap = req.getParameterMap();
+
         Enumeration<String> headerNames = req.getHeaderNames();
-        while (headerNames.hasMoreElements()){
+        while (headerNames.hasMoreElements()) {
             String header = headerNames.nextElement();
-            System.out.println("%s: %s".formatted(header,req.getHeader(header)));
+            System.out.println("%s: %s".formatted(header, req.getHeader(header)));
         }
+
 
         resp.setContentType("text/html; charset=UTF-8");
         resp.setHeader("token", "123456");
