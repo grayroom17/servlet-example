@@ -1,15 +1,17 @@
 package com.servlet.example.http.servlet;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.stream.Stream;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.Map;
 
 @WebServlet(urlPatterns = "/first-servlet")
 public class FirstServlet extends HttpServlet {
@@ -23,6 +25,11 @@ public class FirstServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String paramValue = req.getParameter("param");
         Map<String, String[]> parameterMap = req.getParameterMap();
+
+        try (BufferedReader reader = req.getReader();
+             Stream<String> lines = reader.lines()) {
+            lines.forEach(System.out::println);
+        }
     }
 
     @Override
