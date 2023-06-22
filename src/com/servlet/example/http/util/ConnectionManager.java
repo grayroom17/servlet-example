@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import lombok.experimental.UtilityClass;
+
 import static com.servlet.example.http.util.PropertiesUtil.getPropertyValue;
 
+@UtilityClass
 public final class ConnectionManager {
 
     private static final String URL_KEY = "db.url";
@@ -24,7 +27,6 @@ public final class ConnectionManager {
         }
     }
 
-    private ConnectionManager() {}
 
     public static Connection getConnection() {
         try {

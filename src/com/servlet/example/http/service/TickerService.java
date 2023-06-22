@@ -19,11 +19,12 @@ public class TickerService {
 
     public List<TicketDto> findAllByFlightId(Long flightId) {
         return ticketDao.findAllByFlightId(flightId).stream()
-                .map(ticket -> new TicketDto(
-                        ticket.getId(),
-                        ticket.getFlightId(),
-                        ticket.getSeatNo()
-                ))
+                .map(ticket -> TicketDto.builder()
+                        .id(ticket.getId())
+                        .flightId(ticket.getFlightId())
+                        .seatNo(ticket.getSeatNo())
+                        .build()
+                )
                 .toList();
     }
 }

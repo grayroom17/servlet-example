@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public final class PropertiesUtil {
 
     private static final Properties PROPERTIES = new Properties();
@@ -19,8 +22,6 @@ public final class PropertiesUtil {
             throw new RuntimeException(e);
         }
     }
-
-    private PropertiesUtil() {}
 
     public static String getPropertyValue(String propertyName) {
         return PROPERTIES.getProperty(propertyName);
