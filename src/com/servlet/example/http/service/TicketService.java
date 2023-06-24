@@ -5,15 +5,15 @@ import java.util.List;
 import com.servlet.example.http.dto.TicketDao;
 import com.servlet.example.http.dto.TicketDto;
 
-public class TickerService {
-    private static final TickerService INSTANCE = new TickerService();
+public class TicketService {
+    private static final TicketService INSTANCE = new TicketService();
 
     private final TicketDao ticketDao = TicketDao.getInstance();
 
-    private TickerService() {
+    private TicketService() {
     }
 
-    public static TickerService getInstance() {
+    public static TicketService getInstance() {
         return INSTANCE;
     }
 
