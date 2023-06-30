@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
+import com.servlet.example.http.entity.Gender;
+import com.servlet.example.http.entity.Role;
 import com.servlet.example.http.entity.User;
 import com.servlet.example.http.util.ConnectionManager;
 
@@ -15,6 +17,12 @@ public class UserDao implements Dao<Integer, User> {
             insert into users (name, birthdate, email, password, role, gender)
             values (?,?,?,?,?,?)""";
 
+    private static final String FIND_BY_EMAIL_AND_PASSWORD = """
+            select *
+            from users
+            where email = ?
+            and password = ?""";
+
     private UserDao() {}
 
 
@@ -25,6 +33,24 @@ public class UserDao implements Dao<Integer, User> {
 
     @Override
     public Optional<User> findById(Integer id) {
+        return Optional.empty();
+    }
+
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_EMAIL_AND_PASSWORD))
+        {
+            preparedStatement.setObject(1, email);
+            preparedStatement.setObject(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return Optional.of(buildUser(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return Optional.empty();
     }
 
@@ -64,5 +90,17 @@ public class UserDao implements Dao<Integer, User> {
 
     public static UserDao getInstance() {
         return INSTANCE;
+    }
+
+    private User buildUser(ResultSet resultSet) throws SQLException {
+        return User.builder()
+                .id(resultSet.getObject("id", Integer.class))
+                .name(resultSet.getObject("name", String.class))
+                .birthdate(resultSet.getObject("birthdate", Date.class).toLocalDate())
+                .email(resultSet.getObject("email", String.class))
+                .password(resultSet.getObject("password", String.class))
+                .role(Role.valueOf(resultSet.getObject("role", String.class)))
+                .gender(Gender.valueOf(resultSet.getObject("gender", String.class)))
+                .build();
     }
 }
