@@ -1,12 +1,9 @@
 package com.servlet.example.http.mapper;
 
-import com.servlet.example.http.dto.CreateUserDto;
-import com.servlet.example.http.entity.Gender;
-import com.servlet.example.http.entity.Role;
+import com.servlet.example.http.dto.UserDto;
 import com.servlet.example.http.entity.User;
-import com.servlet.example.http.util.LocalDateFormatter;
 
-public class UserMapper implements Mapper<CreateUserDto, User> {
+public class UserMapper implements Mapper<User, UserDto> {
 
     private static final UserMapper INSTANCE = new UserMapper();
 
@@ -14,14 +11,14 @@ public class UserMapper implements Mapper<CreateUserDto, User> {
     }
 
     @Override
-    public User map(CreateUserDto dto) {
-        return User.builder()
-                .name(dto.getName())
-                .birthdate(LocalDateFormatter.format(dto.getBirthdate()))
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .role(Role.valueOf(dto.getRole()))
-                .gender(Gender.valueOf(dto.getGender()))
+    public UserDto map(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .birthdate(user.getBirthdate())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .gender(user.getGender())
                 .build();
     }
 
