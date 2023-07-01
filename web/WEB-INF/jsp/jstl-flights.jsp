@@ -4,6 +4,7 @@
 <html>
 <head>Title</head>
 <body>
+<%@ include file="header.jsp" %>
 <h1>Список перелетов</h1>
 <ul>
     <c:forEach var="flight" items="${requestScope.flights}">
