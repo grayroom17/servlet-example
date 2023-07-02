@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/registration")
+import static com.servlet.example.http.util.UrlPath.REGISTRATION;
+
+@WebServlet(REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
 
     private final UserService userService = UserService.getInstance();
