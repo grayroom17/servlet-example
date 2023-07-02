@@ -12,7 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 
-@WebServlet("/login")
+import static com.servlet.example.http.util.UrlPath.LOGIN;
+
+@WebServlet(LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final UserService userService = UserService.getInstance();
