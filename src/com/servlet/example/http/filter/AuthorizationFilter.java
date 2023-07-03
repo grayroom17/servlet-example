@@ -9,14 +9,12 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.servlet.example.http.util.UrlPath.IMAGES;
-import static com.servlet.example.http.util.UrlPath.LOGIN;
-import static com.servlet.example.http.util.UrlPath.REGISTRATION;
+import static com.servlet.example.http.util.UrlPath.*;
 
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 
-    private static final Set<String> PUBLIC_PATH = Set.of(LOGIN, REGISTRATION, IMAGES);
+    private static final Set<String> PUBLIC_PATH = Set.of(LOGIN, REGISTRATION, IMAGES, LOCALE);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -26,7 +24,7 @@ public class AuthorizationFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             String previousPage = ((HttpServletRequest) request).getHeader("referer");
-            ((HttpServletResponse) response).sendRedirect(previousPage != null ? previousPage :  LOGIN);
+            ((HttpServletResponse) response).sendRedirect(previousPage != null ? previousPage : LOGIN);
         }
     }
 
