@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
     @SneakyThrows
     private static void onLoginSuccess(HttpServletRequest req, HttpServletResponse resp, UserDto dto) {
         req.getSession().setAttribute("user", dto);
-        resp.sendRedirect("/flights");
+        resp.sendRedirect("/jstl-flights");
     }
 
     @SneakyThrows
